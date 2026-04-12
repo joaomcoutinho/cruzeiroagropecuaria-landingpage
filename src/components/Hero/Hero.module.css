@@ -1,0 +1,349 @@
+/* Camada de imagem em tela cheia atrás do texto + gradiente longo — sem “corte” entre colunas */
+
+.hero {
+  position: relative;
+  display: grid;
+  padding-top: 72px;
+  min-height: 100vh;
+  background: var(--verde-escuro);
+}
+
+.left {
+  position: relative;
+  z-index: 2;
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 88px 48px 88px 88px;
+  max-width: 100%;
+}
+
+/* Mobile: texto sobre fundo sólido; imagem abaixo */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    min-height: unset;
+  }
+
+  .left {
+    padding: 40px 32px 48px;
+    background: var(--verde-escuro);
+  }
+
+  .bg {
+    grid-column: 1;
+    grid-row: 2;
+    min-height: 360px;
+    height: auto;
+  }
+}
+
+/* Desktop: mesma linha — texto na metade esquerda, foto contínua por baixo de tudo */
+@media (min-width: 901px) {
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .left {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 88px 40px 88px 88px;
+    /* Sem borda: o verde vem do gradiente sobre a mesma foto da direita */
+    background: transparent;
+    align-self: center;
+  }
+
+  .bg {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-height: calc(100vh - 72px);
+  }
+}
+
+/* Hero: entrada um pouco mais lenta e suave que o restante da página */
+.left :global(.fade-in) {
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.left :global(.fade-in.visible) {
+  transform: translateY(0);
+}
+
+.left :global(.fade-in:not(.visible)) {
+  transform: translateY(14px);
+}
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: rgba(232, 217, 184, 0.82);
+  margin-bottom: 22px;
+  line-height: 1.5;
+  max-width: 22em;
+}
+
+.titleRule {
+  width: min(132px, 42%);
+  height: 2px;
+  margin-bottom: 22px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(139, 118, 88, 0.35) 0%,
+    rgba(184, 204, 138, 0.55) 42%,
+    rgba(122, 154, 69, 0.35) 100%
+  );
+  box-shadow: 0 1px 0 rgba(28, 41, 16, 0.25);
+  transform: rotate(-0.35deg);
+  opacity: 0.92;
+}
+
+.title {
+  font-family: var(--serif);
+  font-size: clamp(2.75rem, 4.2vw, 4.25rem);
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--creme);
+  margin-bottom: 28px;
+  max-width: 14em;
+}
+
+.em {
+  font-style: italic;
+  font-weight: 500;
+  color: #c4d89a;
+}
+
+.lead {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(244, 237, 216, 0.78);
+  max-width: 400px;
+  margin-bottom: 40px;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 28px;
+}
+
+.btnPrimary {
+  display: inline-block;
+  background: linear-gradient(180deg, #6d8c3f 0%, #5a7634 48%, #4d682c 100%);
+  color: #f8f4e8;
+  padding: 15px 32px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(35, 48, 22, 0.45);
+  cursor: pointer;
+  font-family: var(--sans);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 1px 2px rgba(12, 18, 8, 0.35);
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    filter 0.35s ease;
+}
+
+.btnPrimary:hover {
+  background: linear-gradient(180deg, #7a9a48 0%, #67853a 50%, #567030 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 2px 8px rgba(12, 18, 8, 0.28);
+  filter: brightness(1.04);
+}
+
+.btnPrimary:active {
+  transform: translateY(1px);
+  filter: brightness(0.97);
+}
+
+.linkSec {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(232, 217, 184, 0.62);
+  border-bottom: 1px solid rgba(232, 217, 184, 0.22);
+  text-decoration: none;
+  padding-bottom: 3px;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.linkSec:hover {
+  color: rgba(244, 237, 216, 0.88);
+  border-bottom-color: rgba(184, 204, 138, 0.45);
+}
+
+/* Foto única em tela cheia (área abaixo do nav) */
+.bg {
+  /* Onde o verde pode ser 100% opaco (≈ padding-esq + largura máx. do bloco de texto) */
+  --hero-solid-end: clamp(360px, calc(88px + 30rem), 660px);
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.imgKen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  /* Evita serrilhado suave em alguns GPUs durante o zoom */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.img {
+  position: absolute;
+  /* Menos “overscan” = menos ampliação digital e foto mais nítida */
+  left: -4%;
+  top: -3%;
+  width: 108%;
+  height: 106%;
+  object-fit: cover;
+  object-position: 58% 42%;
+  /* Tom quente leve sem “lama” — preserva pelo, chifre e pasto */
+  filter: contrast(1.04) brightness(0.94) saturate(1.02) sepia(0.04);
+  animation: heroKen 28s ease-in-out infinite alternate;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  image-rendering: auto;
+}
+
+@keyframes heroKen {
+  from {
+    transform: translateZ(0) scale(1);
+  }
+  to {
+    /* Zoom mais contido = menos perda de detalhe */
+    transform: translateZ(0) scale(1.035);
+  }
+}
+
+/*
+ * Faixa esquerda = verde idêntico ao fundo da página (opaco).
+ * Depois do fim da zona de leitura, transição longa com vários degraus — o pasto “nasce” do verde.
+ */
+.overlayBlend {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    var(--verde-escuro) 0,
+    var(--verde-escuro) var(--hero-solid-end),
+    rgba(28, 41, 16, 0.94) calc(var(--hero-solid-end) + 28px),
+    rgba(28, 41, 16, 0.78) calc(var(--hero-solid-end) + 88px),
+    rgba(28, 41, 16, 0.48) calc(var(--hero-solid-end) + 180px),
+    rgba(28, 41, 16, 0.22) calc(var(--hero-solid-end) + 300px),
+    rgba(28, 41, 16, 0.07) calc(var(--hero-solid-end) + 420px),
+    transparent min(100%, calc(var(--hero-solid-end) + 560px))
+  );
+}
+
+/* Névoa suave só na transição — sem multiply forte à esquerda (evita “costura”) */
+.overlayMist {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    100% 90% at 55% 48%,
+    transparent 30%,
+    rgba(48, 42, 28, 0.06) 100%
+  );
+  opacity: 0.55;
+}
+
+.overlayWarm {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  /* Calor do pôr do sol sem escurecer demais o gado */
+  background: linear-gradient(
+    165deg,
+    rgba(88, 62, 32, 0.05) 0%,
+    transparent 40%,
+    rgba(28, 41, 16, 0.14) 100%
+  );
+}
+
+@media (min-width: 901px) {
+  .overlayMist {
+    opacity: 0.35;
+    /* Reforça mistura só na zona central-direita, não sobre o verde sólido */
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      transparent min(35%, 400px),
+      #000 min(45%, 480px),
+      #000 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      transparent min(35%, 400px),
+      #000 min(45%, 480px),
+      #000 100%
+    );
+  }
+}
+
+@media (max-width: 900px) {
+  .title {
+    max-width: none;
+  }
+
+  .overlayBlend {
+    background: linear-gradient(
+      180deg,
+      rgba(22, 32, 14, 0.72) 0%,
+      rgba(28, 41, 16, 0.25) 50%,
+      rgba(28, 41, 16, 0.42) 100%
+    );
+  }
+
+  .overlayMist {
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img {
+    animation: none;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+  }
+
+  .left :global(.fade-in) {
+    transition: opacity 0.45s ease;
+  }
+
+  .left :global(.fade-in:not(.visible)) {
+    transform: none;
+  }
+}

@@ -1,0 +1,141 @@
+.section {
+  background: var(--creme);
+  padding: 100px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.left {
+  max-width: 480px;
+}
+
+.h2 {
+  font-family: var(--serif);
+  font-size: 52px;
+  color: var(--text-principal);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.h2 em {
+  font-style: italic;
+  color: var(--verde-campo);
+}
+
+.lead {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-secundario);
+  margin-bottom: 28px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid rgba(74, 104, 40, 0.25);
+  border-radius: 2px;
+  padding: 20px 24px;
+  text-decoration: none;
+  color: var(--text-principal);
+  font-size: 14px;
+  font-weight: 500;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.btn:hover {
+  background: var(--verde-campo);
+  color: var(--creme);
+}
+
+.btn:hover .sub {
+  color: rgba(244, 237, 216, 0.75);
+}
+
+.icon {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--verde-campo);
+  font-weight: 500;
+}
+
+.sub {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secundario);
+  transition: color 0.25s ease;
+}
+
+.right {
+  border-top: 1px solid rgba(74, 104, 40, 0.12);
+}
+
+.row {
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(74, 104, 40, 0.12);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.rLabel {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--verde-campo);
+  margin-bottom: 8px;
+}
+
+.rVal {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--text-principal);
+}
+
+.rSub {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-secundario);
+  margin-top: 4px;
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding: 72px 32px;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .h2 {
+    font-size: 36px;
+  }
+}
