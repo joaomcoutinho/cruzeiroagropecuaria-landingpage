@@ -4,8 +4,9 @@ import { useFadeIn } from '../../hooks/useFadeIn';
 import styles from './Animais.module.css';
 
 const base = import.meta.env.BASE_URL;
-const IMG_QUARTO_MILHA = `${base}animal-quarto-de-milha.png`;
-const IMG_REM_DULLDOG = `${base}animal-rem-dulldog.png`;
+const IMG_ANGUS = `${base}img/animal-angus.png`;
+const IMG_QUARTO_MILHA = `${base}img/animal-quarto-de-milha.png`;
+const IMG_REM_DULLDOG = `${base}img/animal-rem-dulldog.png`;
 
 const breeds = [
   {
@@ -18,6 +19,18 @@ const breeds = [
     imgPosition: 'center 42%',
     desc: 'Rebanho selecionado para rusticidade e ganho de peso em pasto, com foco em conformação e docilidade.',
     attrs: ['Adaptação a pastagens nativas', 'Uniformidade de pelagem', 'Manejo em grupo'],
+  },
+  {
+    id: 'angus',
+    tabLabel: 'Angus',
+    race: 'Angus',
+    subtitle: 'Escócia · precoce, produtivo e adaptável',
+    farm: 'Engenho Cruzeiro',
+    img: IMG_ANGUS,
+    imgPosition: 'center 42%',
+    desc:
+      'O Angus é uma das raças de corte mais valorizadas do mundo, reconhecida pela qualidade da carne e pela eficiência produtiva. Responde bem tanto a pasto quanto em sistemas mais intensivos, mantendo padrão e regularidade. Pelagem preta ou vermelha; destaque para carne macia, marmoreio e alto rendimento.',
+    attrs: ['Boa conversão alimentar', 'Ganho de peso consistente', 'Facilidade de manejo'],
   },
   {
     id: 'qm',
@@ -108,7 +121,7 @@ export default function Animais() {
               ))}
             </ul>
             <p className={styles.farm}>
-              <span className={styles.farmLabel}>Origem</span>
+              <span className={styles.farmLabel}>Fazenda</span>
               {current.farm}
             </p>
             <div className={styles.ctas}>

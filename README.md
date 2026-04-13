@@ -27,7 +27,8 @@ Deploy no **GitHub Pages** via workflow em `.github/workflows/deploy-pages.yml` 
 
 | Pasta / arquivo | Conteúdo |
 |-----------------|----------|
-| `public/` | Imagens estáticas (hero, favicon, fazendas, animais) servidas na raiz do site |
+| `public/` | `favicon.png` na raiz do deploy |
+| `public/img/` | Fotos do site (hero, fazendas, raças) — referências com `BASE_URL` + `img/...` |
 | `src/components/` | Loader, Nav, Hero, seções e Footer (cada um com `.module.css`) |
 | `src/data/imagesData.js` | Logo e fotos embutidas em base64 (Loader, História, etc.) |
 | `src/constants/contact.js` | Telefone / WhatsApp |

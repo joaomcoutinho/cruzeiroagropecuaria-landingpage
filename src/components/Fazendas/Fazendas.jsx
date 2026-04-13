@@ -2,7 +2,7 @@ import { IMG_CAMPO, IMG_PASTANDO } from '../../data/imagesData';
 import { useFadeIn } from '../../hooks/useFadeIn';
 import styles from './Fazendas.module.css';
 
-const IMG_BOM_RETIRO = `${import.meta.env.BASE_URL}fazenda-bom-retiro.png`;
+const IMG_BOM_RETIRO = `${import.meta.env.BASE_URL}img/fazenda-bom-retiro.png`;
 
 const farms = [
   {

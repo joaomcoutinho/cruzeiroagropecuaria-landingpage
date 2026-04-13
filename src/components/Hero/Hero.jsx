@@ -1,7 +1,7 @@
 import { useFadeIn } from '../../hooks/useFadeIn';
 import styles from './Hero.module.css';
 
-const HERO_IMAGE = `${import.meta.env.BASE_URL}hero-principal.png`;
+const HERO_IMAGE = `${import.meta.env.BASE_URL}img/hero-principal.png`;
 
 export default function Hero() {
   const rEyebrow = useFadeIn(0);
