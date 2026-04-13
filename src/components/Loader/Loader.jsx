@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLoader } from '../../hooks/useLoader';
-import { LOGO, IMG_CAMPO } from '../../assets/imagesData';
+import { LOGO, IMG_CAMPO } from '../../data/imagesData';
 import styles from './Loader.module.css';
 
 export default function Loader() {

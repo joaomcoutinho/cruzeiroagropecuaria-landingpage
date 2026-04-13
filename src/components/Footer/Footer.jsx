@@ -1,4 +1,4 @@
-import { LOGO } from '../../assets/imagesData';
+import { LOGO } from '../../data/imagesData';
 import styles from './Footer.module.css';
 
 export default function Footer() {

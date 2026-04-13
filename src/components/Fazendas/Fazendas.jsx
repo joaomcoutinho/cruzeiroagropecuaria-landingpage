@@ -1,4 +1,4 @@
-import { IMG_CAMPO, IMG_PASTANDO } from '../../assets/imagesData';
+import { IMG_CAMPO, IMG_PASTANDO } from '../../data/imagesData';
 import { useFadeIn } from '../../hooks/useFadeIn';
 import styles from './Fazendas.module.css';
 

@@ -1,16 +1,40 @@
-# React + Vite
+# Cruzeiro Agropecuária — Landing page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Site institucional em **React** + **Vite**, estilos em **CSS Modules**.
 
-Currently, two official plugins are available:
+## Como rodar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+Build de produção:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm run build
+```
 
-## Expanding the ESLint configuration
+Preview do build:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm run preview
+```
+
+Deploy no **GitHub Pages** via workflow em `.github/workflows/deploy-pages.yml` (branch `main`).
+
+## Estrutura principal
+
+| Pasta / arquivo | Conteúdo |
+|-----------------|----------|
+| `public/` | Imagens estáticas (hero, favicon, fazendas, animais) servidas na raiz do site |
+| `src/components/` | Loader, Nav, Hero, seções e Footer (cada um com `.module.css`) |
+| `src/data/imagesData.js` | Logo e fotos embutidas em base64 (Loader, História, etc.) |
+| `src/constants/contact.js` | Telefone / WhatsApp |
+| `src/hooks/` | `useFadeIn`, `useLoader` |
+| `src/styles/global.css` | Reset, variáveis `:root`, classe `.fade-in` |
+
+## Stack
+
+- React 19 · Vite 8
+- Fontes: Cormorant Garamond + Barlow (Google Fonts, `index.html`)

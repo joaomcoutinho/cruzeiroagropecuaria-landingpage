@@ -218,7 +218,8 @@
   width: 108%;
   height: 106%;
   object-fit: cover;
-  object-position: 58% 42%;
+  /* Rebanho central, céu dramático ao entardecer */
+  object-position: 50% 46%;
   /* Tom quente leve sem “lama” — preserva pelo, chifre e pasto */
   filter: contrast(1.04) brightness(0.94) saturate(1.02) sepia(0.04);
   animation: heroKen 28s ease-in-out infinite alternate;

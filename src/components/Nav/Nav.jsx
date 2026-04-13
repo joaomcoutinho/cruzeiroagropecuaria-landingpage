@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { LOGO } from '../../assets/imagesData';
+import { LOGO } from '../../data/imagesData';
 import { PHONE_DISPLAY, WHATSAPP_URL } from '../../constants/contact';
 import styles from './Nav.module.css';
 

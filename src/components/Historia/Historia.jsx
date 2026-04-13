@@ -1,4 +1,4 @@
-import { IMG_ACUDE, IMG_PASTANDO, IMG_HERO, IMG_CAMPO } from '../../assets/imagesData';
+import { IMG_ACUDE, IMG_PASTANDO, IMG_HERO, IMG_CAMPO } from '../../data/imagesData';
 import { useFadeIn } from '../../hooks/useFadeIn';
 import styles from './Historia.module.css';
 

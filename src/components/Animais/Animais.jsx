@@ -1,4 +1,5 @@
-import { IMG_HERO } from '../../assets/imagesData';
+import { useState } from 'react';
+import { IMG_HERO } from '../../data/imagesData';
 import { useFadeIn } from '../../hooks/useFadeIn';
 import styles from './Animais.module.css';
 
@@ -6,66 +7,23 @@ const base = import.meta.env.BASE_URL;
 const IMG_QUARTO_MILHA = `${base}animal-quarto-de-milha.png`;
 const IMG_REM_DULLDOG = `${base}animal-rem-dulldog.png`;
 
-function AnimalCard({ animal, index }) {
-  const ref = useFadeIn(index * 90);
-  return (
-    <article
-      ref={ref}
-      className={`fade-in ${styles.card} ${index === 1 ? styles.cardCenter : ''}`}
-    >
-      <div className={styles.imgWrap}>
-        <span className={`${styles.selo} ${animal.seloClass}`}>{animal.selo}</span>
-        <img
-          src={animal.img}
-          alt=""
-          style={
-            animal.imgPosition
-              ? { objectPosition: animal.imgPosition }
-              : index === 1
-                ? { objectPosition: 'center 40%' }
-                : undefined
-          }
-        />
-        <div className={styles.imgVin} aria-hidden />
-      </div>
-      <div className={styles.body}>
-        <div className={styles.num}>{animal.n}</div>
-        <h3 className={styles.race}>{animal.race}</h3>
-        <p className={styles.origin}>{animal.origin}</p>
-        <div className={styles.divider} aria-hidden />
-        <p className={styles.desc}>{animal.desc}</p>
-        <ul className={styles.attrs}>
-          {animal.attrs.map((x) => (
-            <li key={x}>{x}</li>
-          ))}
-        </ul>
-        <div className={styles.foot}>
-          <span className={styles.farm}>{animal.farm}</span>
-          <a className={styles.link} href="#contato">Consultar →</a>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-const animals = [
+const breeds = [
   {
-    n: '01',
+    id: 'nelore',
+    tabLabel: 'Nelore',
     race: 'Nelore',
-    selo: 'Gado de Corte',
-    seloClass: styles.seloCorte,
-    origin: 'Brasil · seleção de matrizes e reprodutores',
+    subtitle: 'Brasil · seleção de matrizes e reprodutores',
     farm: 'Faz. São Mateus',
     img: IMG_HERO,
+    imgPosition: 'center 42%',
     desc: 'Rebanho selecionado para rusticidade e ganho de peso em pasto, com foco em conformação e docilidade.',
     attrs: ['Adaptação a pastagens nativas', 'Uniformidade de pelagem', 'Manejo em grupo'],
   },
   {
-    n: '02',
+    id: 'qm',
+    tabLabel: 'Quarto de Milha',
     race: 'Quarto de Milha',
-    selo: 'Equino',
-    seloClass: styles.seloEq,
-    origin: 'Linha esportiva · performance e temperamento',
+    subtitle: 'Linha esportiva · performance e temperamento',
     farm: 'Engenho Cruzeiro',
     img: IMG_QUARTO_MILHA,
     imgPosition: 'center 42%',
@@ -73,11 +31,10 @@ const animals = [
     attrs: ['Mobilidade e equilíbrio', 'Acompanhamento veterinário', 'Ambiente controlado'],
   },
   {
-    n: '03',
+    id: 'elite',
+    tabLabel: 'Genética Elite',
     race: 'Nelore var. REM Dulldog',
-    selo: 'Genética Elite',
-    seloClass: styles.seloGen,
-    origin: 'Top 0,5% ANCP · melhoramento contínuo',
+    subtitle: 'Top 0,5% ANCP · melhoramento contínuo',
     farm: 'Faz. Bom Retiro',
     img: IMG_REM_DULLDOG,
     imgPosition: 'center 45%',
@@ -87,24 +44,82 @@ const animals = [
 ];
 
 export default function Animais() {
+  const [active, setActive] = useState(0);
   const rHead = useFadeIn(0);
+  const current = breeds[active];
 
   return (
     <section id="animais" className={styles.section}>
       <div className={styles.inner}>
         <header ref={rHead} className={`fade-in ${styles.header}`}>
-          <div className={styles.rule} aria-hidden />
-          <div className={styles.headMid}>
-            <p className={styles.eyebrow}>Catálogo</p>
-            <h2 className={styles.h2}>Raças & Genética</h2>
-          </div>
-          <div className={styles.rule} aria-hidden />
+          <p className={styles.eyebrow}>Catálogo</p>
+          <h2 className={styles.h2}>Raças & Genética</h2>
+          <div className={styles.titleRule} aria-hidden />
         </header>
 
-        <div className={styles.grid}>
-          {animals.map((a, i) => (
-            <AnimalCard key={a.n} animal={a} index={i} />
+        <div
+          className={styles.tabs}
+          role="tablist"
+          aria-label="Categorias de animais"
+        >
+          {breeds.map((b, i) => (
+            <button
+              key={b.id}
+              type="button"
+              role="tab"
+              id={`tab-${b.id}`}
+              aria-selected={active === i}
+              aria-controls={`panel-${b.id}`}
+              className={`${styles.tab} ${active === i ? styles.tabActive : ''}`}
+              onClick={() => setActive(i)}
+            >
+              {b.tabLabel}
+            </button>
           ))}
+        </div>
+
+        <div
+          className={styles.main}
+          role="tabpanel"
+          id={`panel-${current.id}`}
+          aria-labelledby={`tab-${current.id}`}
+        >
+          <div className={styles.visual}>
+            <div className={styles.imageFrame}>
+              <div className={styles.imageKen} key={current.id}>
+                <img
+                  className={styles.mainImg}
+                  src={current.img}
+                  alt=""
+                  style={{ objectPosition: current.imgPosition }}
+                />
+                <div className={styles.imgWarm} aria-hidden />
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.copy} key={active}>
+            <p className={styles.kicker}>{current.subtitle}</p>
+            <h3 className={styles.raceTitle}>{current.race}</h3>
+            <p className={styles.desc}>{current.desc}</p>
+            <ul className={styles.attrs}>
+              {current.attrs.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <p className={styles.farm}>
+              <span className={styles.farmLabel}>Origem</span>
+              {current.farm}
+            </p>
+            <div className={styles.ctas}>
+              <a className={styles.btnPrimary} href="#contato">
+                Consultar disponibilidade
+              </a>
+              <a className={styles.linkSec} href="#contato">
+                Falar com especialista →
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

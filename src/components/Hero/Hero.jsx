@@ -1,6 +1,7 @@
-import { IMG_HERO } from '../../assets/imagesData';
 import { useFadeIn } from '../../hooks/useFadeIn';
 import styles from './Hero.module.css';
+
+const HERO_IMAGE = `${import.meta.env.BASE_URL}hero-principal.png`;
 
 export default function Hero() {
   const rEyebrow = useFadeIn(0);
@@ -36,8 +37,8 @@ export default function Hero() {
         <div className={styles.imgKen}>
           <img
             className={styles.img}
-            src={IMG_HERO}
-            alt="Rebanho Nelore no pasto ao entardecer"
+            src={HERO_IMAGE}
+            alt="Rebanho Nelore ao pôr do sol em pastagem verde"
             fetchPriority="high"
             decoding="async"
           />
